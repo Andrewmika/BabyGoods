@@ -12,6 +12,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnLogin;
 @property (strong, nonatomic) IBOutlet UITextField *txfdID;
 @property (strong, nonatomic) IBOutlet UITextField *txfdPSW;
-@property (strong, nonatomic) IBOutlet UIButton *btnCancle;
 
 @end
