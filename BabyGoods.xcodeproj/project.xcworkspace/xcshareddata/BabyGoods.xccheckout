@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F83E0617-410C-4F4F-95E8-1492F6BA3A91</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BabyGoods</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3AF67862B1A21EA593A633EBE8E0C436BA2437BE</key>
+		<string>ssh://github.com/Andrewmika/BabyGoods.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BabyGoods.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3AF67862B1A21EA593A633EBE8E0C436BA2437BE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/Andrewmika/BabyGoods.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3AF67862B1A21EA593A633EBE8E0C436BA2437BE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3AF67862B1A21EA593A633EBE8E0C436BA2437BE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BabyGoods</string>
+		</dict>
+	</array>
+</dict>
+</plist>

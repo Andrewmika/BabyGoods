@@ -1,0 +1,21 @@
+PODS:
+  - AVOSCloud (3.0.2)
+  - AVOSCloudSNS (3.0.2):
+    - AVOSCloud
+  - AVOSCloudUI (2.1.2):
+    - AVOSCloud
+  - MBProgressHUD (0.9.1)
+
+DEPENDENCIES:
+  - AVOSCloud
+  - AVOSCloudSNS
+  - AVOSCloudUI
+  - MBProgressHUD
+
+SPEC CHECKSUMS:
+  AVOSCloud: eeacd471d18b3e24c3cb0d089110453261084489
+  AVOSCloudSNS: 7d83ffbd3738b92c9ece62e93a65fa593587274b
+  AVOSCloudUI: 1fb777f687fdcb1c8e78917d857425f1bc3e754c
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+
+COCOAPODS: 0.35.0
