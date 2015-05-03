@@ -8,6 +8,7 @@
 
 #import "UnifiedUserInfoManager.h"
 
+#define Dict_loginName @"loginName"
 @implementation UnifiedUserInfoManager
 + (UnifiedUserInfoManager *)share
 {
@@ -27,16 +28,21 @@
     }
     return self;
 }
-- (void)saveUserPhoneNum:(NSString *)phoneNumber
+- (void)saveUserLoginName:(NSString *)LoginName
 {
-    [_defaults setObject:phoneNumber forKey:@"PhoneNum"];
+    [_defaults setObject:LoginName forKey:Dict_loginName];
     [_defaults synchronize];
 }
 
-- (NSString *)getUnserPhoneNum
+- (NSString *)getUserLoginName
 {
-    NSString *strPhoneNum;
-    
-    return strPhoneNum;
+    NSString *strLoginName;
+    [_defaults objectForKey:Dict_loginName];
+    return strLoginName;
+}
+
+- (void)releaseAllDefaults
+{
+    [_defaults removeObjectForKey:Dict_loginName];
 }
 @end

@@ -14,7 +14,7 @@
 #import "MyDefine.h"
 #import <SVProgressHUD.h>
 
-@interface MeMainTableViewController ()<UserInfoInputViewControllerDelegate>
+@interface MeMainTableViewController ()<UserInfoInputViewControllerDelegate,UIAlertViewDelegate>
 @property (nonatomic,strong) NSArray *arrayTitles;    // 标题
 @property (nonatomic,strong) NSArray *arrayData;    // 信息
 @property (nonatomic) NSInteger currentTag;    // 当前tag
@@ -32,13 +32,23 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    AVUser *currentUser = [AVUser currentUser];
+    if (currentUser != nil) {
+        // 允许用户使用应用
+        AVQuery *query = [AVQuery queryWithClassName:kUserInfoModel];
+//        [query whereKey:user_loginName equalTo:[[UnifiedUserInfoManager share] getUserLoginName]];
+        AVObject *object = [query getFirstObject];
+        self.userInfoModel.userName = [object objectForKey:user_name];
+        self.userInfoModel.userMobile = [object objectForKey:user_mobile];
+        self.userInfoModel.userAddr = [object objectForKey:user_address];
+        self.userInfoModel.loginName = [object objectForKey:user_loginName];
+
+    } else {
+        //缓存用户对象为空时，可打开用户注册界面…
+        [self performSegueWithIdentifier:@"meToLogin" sender:self.navigationController];
+    }
+
     self.arrayTitles = @[@"姓名",@"手机",@"地址"];
-    AVQuery *query = [AVQuery queryWithClassName:kUserInfoModel];
-    AVObject *object = [query getFirstObject];
-    self.userInfoModel.userName = [object objectForKey:user_name];
-    self.userInfoModel.userMobile = [object objectForKey:user_mobile];
-    self.userInfoModel.userAddr = [object objectForKey:user_address];
-    self.userInfoModel.loginName = [object objectForKey:user_loginName];    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,16 +56,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    AVUser *currentUser = [AVUser currentUser];
-    if (currentUser != nil) {
-        // 允许用户使用应用
-    } else {
-        //缓存用户对象为空时，可打开用户注册界面…
-        [self performSegueWithIdentifier:@"meToLogin" sender:self];
-    }
+    [super viewWillAppear:animated];
 }
 
 - (UserInfoModel *)userInfoModel
@@ -65,6 +68,12 @@
         _userInfoModel = [[UserInfoModel alloc] init];
     }
     return _userInfoModel;
+}
+- (IBAction)logOut:(UIBarButtonItem *)sender
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"注销登录" message:@"您将要注销登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alertView show];
+    
 }
 
 // 保存数据
@@ -224,5 +233,23 @@
             break;
     }
     [self.tableView reloadData];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [AVUser logOut];
+        AVUser *currentUser = [AVUser currentUser];
+        if (currentUser != nil) {
+            // 允许用户使用应用
+            [SVProgressHUD showErrorWithStatus:@"请重试"];
+        } else {
+            //缓存用户对象为空时，可打开用户注册界面…
+            [self performSegueWithIdentifier:@"meToLogin" sender:self.navigationController];
+        }
+
+    }
 }
 @end

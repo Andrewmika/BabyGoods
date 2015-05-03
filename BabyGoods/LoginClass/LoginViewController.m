@@ -30,12 +30,15 @@
 - (IBAction)login {
     [AVUser logInWithUsernameInBackground:self.txfdID.text password:self.txfdPSW.text block:^(AVUser *user, NSError *error) {
         if (user != nil) {
-            [[UnifiedUserInfoManager share] saveUserPhoneNum:self.txfdID.text];
+            [[UnifiedUserInfoManager share] saveUserLoginName:self.txfdID.text];
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }
     }];
+}
+- (IBAction)loginCancled:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

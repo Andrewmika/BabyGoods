@@ -42,7 +42,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="联系人" id="QPZ-46-2Ej"/>
                     <connections>
-                        <segue destination="WvX-mQ-MLj" kind="modal" identifier="contactToLogin" id="T2A-n5-5f6"/>
+                        <segue destination="cql-FW-1uP" kind="modal" identifier="contactToLogin" id="RO0-vd-jsu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3x-2L-we4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -88,7 +88,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="WvX-mQ-MLj" kind="modal" identifier="findToLogin" id="cWt-JD-96G"/>
+                        <segue destination="cql-FW-1uP" kind="modal" identifier="findToLogin" id="pbB-oy-SHs"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u6n-dk-SKv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -110,13 +110,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="名称：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7e-LI-lPx">
                                 <rect key="frame" x="33" y="217" width="51" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="年龄段：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpR-pE-rt0">
                                 <rect key="frame" x="16" y="263" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="物品名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fhh-sy-eUL">
@@ -209,7 +209,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIK-Zk-D2J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="730" y="902"/>
+            <point key="canvasLocation" x="838" y="890"/>
         </scene>
         <!--我-->
         <scene sceneID="dah-gN-N11">
@@ -228,7 +228,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="姓名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tm6-az-bCz">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iT3-dI-M0E">
@@ -249,10 +249,13 @@
                             <outlet property="delegate" destination="ewb-RD-lN0" id="m0W-9a-n87"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="efc-gc-inC"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="我" id="PVf-6J-TfT">
+                        <barButtonItem key="leftBarButtonItem" title="注销" id="wNd-bz-Wgs">
+                            <connections>
+                                <action selector="logOut:" destination="ewb-RD-lN0" id="pOd-Qh-pQc"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="保存" id="wxh-7b-Goo">
                             <connections>
                                 <action selector="saveData:" destination="ewb-RD-lN0" id="kTc-Pf-b6a"/>
@@ -261,7 +264,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="WvX-mQ-MLj" kind="modal" identifier="meToLogin" id="mcp-uN-aM6"/>
+                        <segue destination="cql-FW-1uP" kind="modal" identifier="meToLogin" id="GrW-x6-DeR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GO1-Tx-jST" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -420,7 +423,11 @@
                         <color key="backgroundColor" red="1" green="0.83641113799207134" blue="0.69442791793935577" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="登录" id="bdu-hv-bNh">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="Yg4-e0-sfy"/>
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="Yg4-e0-sfy">
+                            <connections>
+                                <action selector="loginCancled:" destination="WvX-mQ-MLj" id="kMI-a6-Jbw"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="注册" id="9XV-tX-XnR">
                             <connections>
                                 <segue destination="fGN-Jc-zaX" kind="push" id="X10-TM-u7j"/>
@@ -567,7 +574,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="cWt-JD-96G"/>
+        <segue reference="pbB-oy-SHs"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.47843137250000001" green="0.81176470590000005" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

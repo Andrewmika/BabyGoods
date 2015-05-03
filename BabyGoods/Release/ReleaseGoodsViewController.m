@@ -59,6 +59,10 @@
         {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }
+
+
+    } progressBlock:^(NSInteger percentDone) {
+        [SVProgressHUD showProgress:(percentDone * 0.01) status:@"正在上传"];
     }];
 }
 
@@ -68,7 +72,7 @@
     [object setObject:self.goodTitle.text forKey:good_name];
     [object setObject:self.ageRange.text forKey:good_ages];
     [object setObject:file forKey:good_image];
-    [object setObject:[[UnifiedUserInfoManager share] getUnserPhoneNum] forKey:good_userName];
+    [object setObject:[[UnifiedUserInfoManager share] getUserLoginName] forKey:good_userName];
     [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded)
         {

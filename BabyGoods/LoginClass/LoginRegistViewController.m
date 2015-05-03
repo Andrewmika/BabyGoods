@@ -36,6 +36,8 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            [[UnifiedUserInfoManager share] saveUserLoginName:self.phoneNum.text];
+
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];

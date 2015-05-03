@@ -47,7 +47,7 @@
         self.userName = @"";
         self.userMobile = @"";
         self.userAddr = @"";
-        self.loginName = [[UnifiedUserInfoManager share] getUnserPhoneNum];
+        self.loginName = [[UnifiedUserInfoManager share] getUserLoginName];
     }
     return self;
 }

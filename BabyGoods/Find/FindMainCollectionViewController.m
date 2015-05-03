@@ -10,8 +10,13 @@
 #import "FindCollectionViewCell.h"
 #import "UnifiedUserInfoManager.h"
 #import "LoginViewController.h"
+#import <AVOSCloud.h>
+#import "goodModel.h"
+#import "MyDefine.h"
 
 @interface FindMainCollectionViewController ()
+
+@property (nonatomic,strong) NSMutableArray *arrayModels; // 物品信息
 
 @end
 
@@ -30,17 +35,34 @@ static NSString * const reuseIdentifier = @"findCell";
     
 //    [self.collectionView setBackgroundColor:[UIColor cyanColor]];
     // Do any additional setup after loading the view.
+    
+    AVQuery *query = [AVQuery queryWithClassName:kGoodModel];
+    NSArray *arrTemp = [query findObjects];
+    for (AVObject *object in arrTemp)
+    {
+        goodModel *model = [[goodModel alloc] init];
+        model.goodName = [object objectForKey:good_name];
+        model.goodAges = [object objectForKey:good_ages];
+        AVFile *file = [object objectForKey:good_image];
+        model.imagePath = file.url;
+        [self.arrayModels addObject:model];
+    }
+
 }
 
+- (NSMutableArray *)arrayModels
+{
+    if (!_arrayModels)
+    {
+        _arrayModels = [NSMutableArray array];
+    }
+    return _arrayModels;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    
-}
 /*
 #pragma mark - Navigation
 
@@ -55,13 +77,13 @@ static NSString * const reuseIdentifier = @"findCell";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete method implementation -- Return the number of sections
-    return 2;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 #warning Incomplete method implementation -- Return the number of items in the section
-    return 10;
+    return self.arrayModels.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -69,6 +91,7 @@ static NSString * const reuseIdentifier = @"findCell";
     
     // Configure the cell
 //    [cell setBackgroundColor:[UIColor grayColor]];
+    [cell setGoodData:self.arrayModels[indexPath.row]];
     return cell;
 }
 

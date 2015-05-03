@@ -14,7 +14,9 @@
 }
 + (UnifiedUserInfoManager *)share;
 
-- (void)saveUserPhoneNum:(NSString *)phoneNumber;
+- (void)saveUserLoginName:(NSString *)LoginName;
 
-- (NSString *)getUnserPhoneNum;
+- (NSString *)getUserLoginName;
+
+- (void)releaseAllDefaults;
 @end

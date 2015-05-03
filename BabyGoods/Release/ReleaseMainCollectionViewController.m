@@ -45,7 +45,7 @@ static NSString * const reuseIdentifier = @"releaseCell";
         // 允许用户使用应用
     } else {
         //缓存用户对象为空时，可打开用户注册界面…
-        [self performSegueWithIdentifier:@"findToLogin" sender:self];
+        [self performSegueWithIdentifier:@"findToLogin" sender:self.navigationController];
     }
 }
 /*

@@ -13,7 +13,7 @@
 
 - (void)setGoodData:(goodModel *)model
 {
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.imagePath]];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:model.imagePath] placeholderImage:[UIImage imageNamed:@"imageViewBG"]];
     [self.lbName setText:model.goodName];
     [self.lbAge setText:model.goodAges];
 }
