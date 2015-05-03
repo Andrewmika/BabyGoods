@@ -8,6 +8,8 @@
 
 #import "FindMainCollectionViewController.h"
 #import "FindCollectionViewCell.h"
+#import "UnifiedUserInfoManager.h"
+#import "LoginViewController.h"
 
 @interface FindMainCollectionViewController ()
 
@@ -35,6 +37,10 @@ static NSString * const reuseIdentifier = @"findCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+}
 /*
 #pragma mark - Navigation
 

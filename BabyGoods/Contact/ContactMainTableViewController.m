@@ -7,6 +7,7 @@
 //
 
 #import "ContactMainTableViewController.h"
+#import <AVOSCloud.h>
 
 @interface ContactMainTableViewController ()
 
@@ -27,6 +28,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    AVUser *currentUser = [AVUser currentUser];
+    if (currentUser != nil) {
+        // 允许用户使用应用
+    } else {
+        //缓存用户对象为空时，可打开用户注册界面…
+        [self performSegueWithIdentifier:@"contactToLogin" sender:self];
+    }
+
 }
 
 #pragma mark - Table view data source

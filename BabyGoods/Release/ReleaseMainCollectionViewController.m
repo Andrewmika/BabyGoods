@@ -7,6 +7,10 @@
 //
 
 #import "ReleaseMainCollectionViewController.h"
+#import "UnifiedUserInfoManager.h"
+#import "LoginViewController.h"
+#import <AVOSCloud.h>
+#import "FindCollectionViewCell.h"
 
 @interface ReleaseMainCollectionViewController ()
 
@@ -14,7 +18,7 @@
 
 @implementation ReleaseMainCollectionViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"releaseCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,7 +27,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[FindCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
 }
@@ -33,6 +37,17 @@ static NSString * const reuseIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    AVUser *currentUser = [AVUser currentUser];
+    if (currentUser != nil) {
+        // 允许用户使用应用
+    } else {
+        //缓存用户对象为空时，可打开用户注册界面…
+        [self performSegueWithIdentifier:@"findToLogin" sender:self];
+    }
+}
 /*
 #pragma mark - Navigation
 
@@ -43,6 +58,9 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 */
 
+- (IBAction)addGoods:(UIBarButtonItem *)sender {
+
+}
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -57,7 +75,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    FindCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
     

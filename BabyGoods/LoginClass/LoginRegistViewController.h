@@ -10,8 +10,7 @@
 
 @interface LoginRegistViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *phoneNum;
+@property (weak, nonatomic) IBOutlet UITextField *password;
 
-@property (weak, nonatomic) IBOutlet UITextField *verifyCode;
-@property (weak, nonatomic) IBOutlet UIButton *btnVerify;
 @property (weak, nonatomic) IBOutlet UIButton *btnRegister;
 @end

@@ -7,6 +7,9 @@
 //
 
 #import "LoginViewController.h"
+#import <AVOSCloud.h>
+#import "UnifiedUserInfoManager.h"
+#import <SVProgressHUD.h>
 
 @interface LoginViewController ()
 
@@ -22,6 +25,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)login {
+    [AVUser logInWithUsernameInBackground:self.txfdID.text password:self.txfdPSW.text block:^(AVUser *user, NSError *error) {
+        if (user != nil) {
+            [[UnifiedUserInfoManager share] saveUserPhoneNum:self.txfdID.text];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }
+    }];
 }
 
 /*

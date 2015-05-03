@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "goodModel.h"
 
 @interface FindCollectionViewCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
 @property (strong, nonatomic) IBOutlet UILabel *lbName;
 
 @property (strong, nonatomic) IBOutlet UILabel *lbAge;
+
+- (void)setGoodData:(goodModel *)model;
 @end

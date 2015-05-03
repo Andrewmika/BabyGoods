@@ -7,6 +7,9 @@
 //
 
 #import "LoginRegistViewController.h"
+#import <AVOSCloud.h>
+#import <SVProgressHUD.h>
+#import "UnifiedUserInfoManager.h"
 
 @interface LoginRegistViewController ()
 
@@ -16,12 +19,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"login"]]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)userRegist {
+    
+    AVUser *user = [AVUser user];
+    user.username = self.phoneNum.text;
+    user.password = self.password.text;
+    
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+            
+        }
+    }];
 }
 
 /*

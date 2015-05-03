@@ -4,6 +4,8 @@ pod 'AVOSCloud'
 pod 'AVOSCloudUI'
 pod 'AVOSCloudSNS'
 pod 'MBProgressHUD'
+pod 'SVProgressHUD', '~> 1.1.3'
+pod 'SDWebImage', '~> 3.7.2'
 target 'BabyGoods' do
 
 end
