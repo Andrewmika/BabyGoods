@@ -15,5 +15,6 @@
 
 #define kUserInfoModel @"UserInfoModel"
 #define kGoodModel @"goodModel"
+#define kContacts @"contacts"
 
 #endif

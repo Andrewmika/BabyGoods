@@ -11,6 +11,8 @@
 #import "UserInfoModel.h"
 #import "MyDefine.h"
 #import <AVOSCloud.h>
+#import "contactModel.h"
+#import "UnifiedUserInfoManager.h"
 
 @interface GoodDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -47,6 +49,11 @@
 - (IBAction)callGoodHost {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",self.infoModel.userMobile]];// 出现是否拨打提示框，结束后弹回app
     [[UIApplication sharedApplication] openURL:url];
+    AVObject *object = [AVObject objectWithClassName:kContacts];
+    [object setObject:self.infoModel.userName forKey:contact_name];
+    [object setObject:self.infoModel.userMobile forKey:contact_mobile];
+    [object setObject:[[UnifiedUserInfoManager share] getUserLoginName] forKey:contact_userLoginName];
+    [object saveInBackground];
 
 }
 

@@ -15,7 +15,7 @@
 
 @interface ReleaseMainCollectionViewController ()
 @property (nonatomic,strong) NSMutableArray *arrayModels; // 物品信息
-
+@property (nonatomic,strong) NSMutableArray *arrayObjects;    // 所有的对象
 @end
 
 @implementation ReleaseMainCollectionViewController
@@ -58,15 +58,32 @@ static NSString * const reuseIdentifier = @"releaseCell";
         [self performSegueWithIdentifier:@"findToLogin" sender:self.navigationController];
     }
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([sender isKindOfClass:[UICollectionViewCell class]])
+    {
+        UICollectionViewCell *cell = (UICollectionViewCell *)sender;
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+        goodModel *model = self.arrayModels[indexPath.row];
+        AVObject *object = self.arrayObjects[indexPath.row];
+        if ([segue.identifier isEqualToString:@"editGood"])
+        {
+            UIViewController *editGoodVC = [segue destinationViewController];
+            // Pass the selected object to the new view controller.
+            [editGoodVC setValue:model forKey:@"model"];
+            [editGoodVC setValue:object forKey:@"object"];
+        }
+        
+    }
+
+
 }
-*/
+
 
 // 获取物品信息
 - (void)getReleaseGoods
@@ -75,25 +92,36 @@ static NSString * const reuseIdentifier = @"releaseCell";
     AVQuery *query = [AVQuery queryWithClassName:kGoodModel];
     NSString *loginName = [[UnifiedUserInfoManager share] getUserLoginName];
     [query whereKey:good_userName equalTo:loginName];
-    NSArray *arrTemp = [query findObjects];
-    for (AVObject *object in arrTemp)
-    {
-        goodModel *model = [[goodModel alloc] init];
-        model.goodName = [object objectForKey:good_name];
-        model.goodAges = [object objectForKey:good_ages];
-        model.goodUserName = [object objectForKey:good_userName];
-        AVFile *file = [object objectForKey:good_image];
-        model.imagePath = file.url;
-        [self.arrayModels addObject:model];
-    }
-    
-    [self.collectionView reloadData];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [self.arrayObjects removeAllObjects];
+        [self.arrayObjects addObjectsFromArray:objects];
+        for (AVObject *object in objects)
+        {
+            goodModel *model = [[goodModel alloc] init];
+            model.goodName = [object objectForKey:good_name];
+            model.goodAges = [object objectForKey:good_ages];
+            model.goodUserName = [object objectForKey:good_userName];
+            AVFile *file = [object objectForKey:good_image];
+            model.imagePath = file.url;
+            [self.arrayModels addObject:model];
+        }
+        
+        [self.collectionView reloadData];
+
+    }];
 
 }
 - (IBAction)addGoods:(UIBarButtonItem *)sender {
 
 }
-
+- (NSMutableArray *)arrayObjects
+{
+    if (!_arrayObjects)
+    {
+        _arrayObjects = [NSMutableArray array];
+    }
+    return _arrayObjects;
+}
 - (NSMutableArray *)arrayModels
 {
     if (!_arrayModels)

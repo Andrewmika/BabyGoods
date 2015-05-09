@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		647759261AF6077200FD99A6 /* NSDictionary+safeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 647759251AF6077200FD99A6 /* NSDictionary+safeManager.m */; };
+		647B68E81AFE3C6300A18B94 /* EditGoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 647B68E71AFE3C6300A18B94 /* EditGoodViewController.m */; };
+		647B68EC1AFE4DA700A18B94 /* contactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 647B68EB1AFE4DA700A18B94 /* contactModel.m */; };
 		6497772C1ACF9DB700886532 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6497772B1ACF9DB700886532 /* main.m */; };
 		6497772F1ACF9DB700886532 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6497772E1ACF9DB700886532 /* AppDelegate.m */; };
 		649777351ACF9DB700886532 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 649777331ACF9DB700886532 /* Main.storyboard */; };
@@ -49,6 +51,10 @@
 		647759231AF6052E00FD99A6 /* MyDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDefine.h; sourceTree = "<group>"; };
 		647759241AF6077200FD99A6 /* NSDictionary+safeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+safeManager.h"; sourceTree = "<group>"; };
 		647759251AF6077200FD99A6 /* NSDictionary+safeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+safeManager.m"; sourceTree = "<group>"; };
+		647B68E61AFE3C6300A18B94 /* EditGoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditGoodViewController.h; sourceTree = "<group>"; };
+		647B68E71AFE3C6300A18B94 /* EditGoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditGoodViewController.m; sourceTree = "<group>"; };
+		647B68EA1AFE4DA700A18B94 /* contactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = contactModel.h; sourceTree = "<group>"; };
+		647B68EB1AFE4DA700A18B94 /* contactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = contactModel.m; sourceTree = "<group>"; };
 		649777261ACF9DB700886532 /* BabyGoods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabyGoods.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6497772A1ACF9DB700886532 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6497772B1ACF9DB700886532 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -112,6 +118,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		647B68E91AFE4D8F00A18B94 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				647B68EA1AFE4DA700A18B94 /* contactModel.h */,
+				647B68EB1AFE4DA700A18B94 /* contactModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		6497771D1ACF9DB700886532 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +154,7 @@
 				64B1999C1AEBA2C500D72009 /* Manager */,
 				6497772D1ACF9DB700886532 /* AppDelegate.h */,
 				6497772E1ACF9DB700886532 /* AppDelegate.m */,
+				647759231AF6052E00FD99A6 /* MyDefine.h */,
 				649777331ACF9DB700886532 /* Main.storyboard */,
 				649777361ACF9DB700886532 /* Images.xcassets */,
 				649777381ACF9DB700886532 /* LaunchScreen.xib */,
@@ -148,7 +164,6 @@
 				649777521ACFA3BA00886532 /* Contact */,
 				649777511ACFA3B200886532 /* Me */,
 				649777291ACF9DB700886532 /* Supporting Files */,
-				647759231AF6052E00FD99A6 /* MyDefine.h */,
 			);
 			path = BabyGoods;
 			sourceTree = "<group>";
@@ -200,6 +215,8 @@
 				6497775A1ACFA64200886532 /* ReleaseMainCollectionViewController.m */,
 				64F126301AF61C11008AD602 /* ReleaseGoodsViewController.h */,
 				64F126311AF61C11008AD602 /* ReleaseGoodsViewController.m */,
+				647B68E61AFE3C6300A18B94 /* EditGoodViewController.h */,
+				647B68E71AFE3C6300A18B94 /* EditGoodViewController.m */,
 			);
 			path = Release;
 			sourceTree = "<group>";
@@ -219,6 +236,7 @@
 		649777521ACFA3BA00886532 /* Contact */ = {
 			isa = PBXGroup;
 			children = (
+				647B68E91AFE4D8F00A18B94 /* Model */,
 				6497775C1ACFA66000886532 /* ContactMainTableViewController.h */,
 				6497775D1ACFA66000886532 /* ContactMainTableViewController.m */,
 			);
@@ -451,6 +469,7 @@
 				649777611ACFA66D00886532 /* MeMainTableViewController.m in Sources */,
 				64F126321AF61C11008AD602 /* ReleaseGoodsViewController.m in Sources */,
 				64EC7E141AF5C65600653841 /* UserInfoModel.m in Sources */,
+				647B68E81AFE3C6300A18B94 /* EditGoodViewController.m in Sources */,
 				649777651ACFB40900886532 /* FindCollectionViewCell.m in Sources */,
 				64DF305E1ADFEEDD008ABCC0 /* LoginRegistViewController.m in Sources */,
 				649777581ACFA63200886532 /* FindMainCollectionViewController.m in Sources */,
@@ -462,6 +481,7 @@
 				6497775E1ACFA66000886532 /* ContactMainTableViewController.m in Sources */,
 				64EC7E101AF5C37B00653841 /* goodModel.m in Sources */,
 				6497772C1ACF9DB700886532 /* main.m in Sources */,
+				647B68EC1AFE4DA700A18B94 /* contactModel.m in Sources */,
 				64B1999F1AEBA2EF00D72009 /* UnifiedUserInfoManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
