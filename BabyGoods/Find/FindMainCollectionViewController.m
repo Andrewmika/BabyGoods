@@ -35,19 +35,12 @@ static NSString * const reuseIdentifier = @"findCell";
     
 //    [self.collectionView setBackgroundColor:[UIColor cyanColor]];
     // Do any additional setup after loading the view.
-    
-    AVQuery *query = [AVQuery queryWithClassName:kGoodModel];
-    NSArray *arrTemp = [query findObjects];
-    for (AVObject *object in arrTemp)
-    {
-        goodModel *model = [[goodModel alloc] init];
-        model.goodName = [object objectForKey:good_name];
-        model.goodAges = [object objectForKey:good_ages];
-        AVFile *file = [object objectForKey:good_image];
-        model.imagePath = file.url;
-        [self.arrayModels addObject:model];
-    }
-
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    [layout setMinimumInteritemSpacing:10];
+    [layout setMinimumLineSpacing:10];
+    [layout setItemSize:CGSizeMake(130, 160)];
+    [layout setSectionInset:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.collectionView setCollectionViewLayout:layout];
 }
 
 - (NSMutableArray *)arrayModels
@@ -63,15 +56,51 @@ static NSString * const reuseIdentifier = @"findCell";
     // Dispose of any resources that can be recreated.
 }
 
-/*
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.arrayModels removeAllObjects];
+    AVQuery *query = [AVQuery queryWithClassName:kGoodModel];
+    NSString *loginName = [[UnifiedUserInfoManager share] getUserLoginName];
+    [query whereKey:good_userName notEqualTo:loginName];
+    NSArray *arrTemp = [query findObjects];
+    for (AVObject *object in arrTemp)
+    {
+        goodModel *model = [[goodModel alloc] init];
+        model.goodName = [object objectForKey:good_name];
+        model.goodAges = [object objectForKey:good_ages];
+        model.goodUserName = [object objectForKey:good_userName];
+        AVFile *file = [object objectForKey:good_image];
+        model.imagePath = file.url;
+        [self.arrayModels addObject:model];
+    }
+    
+    [self.collectionView reloadData];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([sender isKindOfClass:[UICollectionViewCell class]])
+    {
+        UICollectionViewCell *cell = (UICollectionViewCell *)sender;
+       NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+        goodModel *model = self.arrayModels[indexPath.row];
+        if ([segue.identifier isEqualToString:@"goodDetail"])
+        {
+            UIViewController *goodDetailVC = [segue destinationViewController];
+            // Pass the selected object to the new view controller.
+            [goodDetailVC setValue:model forKey:@"goodModel"];
+        }
+
+    }
+
 }
-*/
+
 
 #pragma mark <UICollectionViewDataSource>
 

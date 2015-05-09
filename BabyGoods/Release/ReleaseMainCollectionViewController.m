@@ -10,9 +10,11 @@
 #import "UnifiedUserInfoManager.h"
 #import "LoginViewController.h"
 #import <AVOSCloud.h>
-#import "FindCollectionViewCell.h"
+#import "ReleaseCollectionViewCell.h"
+#import "MyDefine.h"
 
 @interface ReleaseMainCollectionViewController ()
+@property (nonatomic,strong) NSMutableArray *arrayModels; // 物品信息
 
 @end
 
@@ -27,9 +29,16 @@ static NSString * const reuseIdentifier = @"releaseCell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
-    [self.collectionView registerClass:[FindCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+//    [self.collectionView registerClass:[ReleaseCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    [layout setMinimumInteritemSpacing:10];
+    [layout setMinimumLineSpacing:10];
+    [layout setItemSize:CGSizeMake(120, 160)];
+    [layout setSectionInset:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.collectionView setCollectionViewLayout:layout];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,6 +52,7 @@ static NSString * const reuseIdentifier = @"releaseCell";
     AVUser *currentUser = [AVUser currentUser];
     if (currentUser != nil) {
         // 允许用户使用应用
+        [self getReleaseGoods];
     } else {
         //缓存用户对象为空时，可打开用户注册界面…
         [self performSegueWithIdentifier:@"findToLogin" sender:self.navigationController];
@@ -58,27 +68,59 @@ static NSString * const reuseIdentifier = @"releaseCell";
 }
 */
 
+// 获取物品信息
+- (void)getReleaseGoods
+{
+    [self.arrayModels removeAllObjects];
+    AVQuery *query = [AVQuery queryWithClassName:kGoodModel];
+    NSString *loginName = [[UnifiedUserInfoManager share] getUserLoginName];
+    [query whereKey:good_userName equalTo:loginName];
+    NSArray *arrTemp = [query findObjects];
+    for (AVObject *object in arrTemp)
+    {
+        goodModel *model = [[goodModel alloc] init];
+        model.goodName = [object objectForKey:good_name];
+        model.goodAges = [object objectForKey:good_ages];
+        model.goodUserName = [object objectForKey:good_userName];
+        AVFile *file = [object objectForKey:good_image];
+        model.imagePath = file.url;
+        [self.arrayModels addObject:model];
+    }
+    
+    [self.collectionView reloadData];
+
+}
 - (IBAction)addGoods:(UIBarButtonItem *)sender {
 
 }
+
+- (NSMutableArray *)arrayModels
+{
+    if (!_arrayModels)
+    {
+        _arrayModels = [NSMutableArray array];
+    }
+    return _arrayModels;
+}
+
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete method implementation -- Return the number of sections
-    return 2;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 #warning Incomplete method implementation -- Return the number of items in the section
-    return 7;
+    return self.arrayModels.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    FindCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    ReleaseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    
+    [cell setGoodData:self.arrayModels[indexPath.row]];
     return cell;
 }
 

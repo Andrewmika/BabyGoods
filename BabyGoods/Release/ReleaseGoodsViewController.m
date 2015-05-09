@@ -85,7 +85,7 @@
     }];
 }
 
-// 设置头像
+// 设置图片
 - (void)pickImageisFromCamera:(BOOL)isFromCamera
 {
     NSInteger sourceType;
@@ -113,6 +113,26 @@
     imagePickerController.delegate = self; imagePickerController.allowsEditing = YES;
     [self presentViewController:imagePickerController animated:YES completion:^{}];
 }
+
+//压缩图片
+- (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
 #pragma mark - image picker delegte 
 // 选择后返回
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -120,9 +140,10 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     if (image != nil)
     {
-        // 设置头像
-        [self.imageView setImage:image];
-        self.model.image = image;
+        UIImage *newImage = [self imageWithImageSimple:image scaledToSize:CGSizeMake(200, 200)];
+        // 设置图片
+        [self.imageView setImage:newImage];
+        self.model.image = newImage;
     }
     // 销毁照片选择器
     [self dismissViewControllerAnimated:NO completion:nil];

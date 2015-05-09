@@ -20,6 +20,8 @@
 		649777611ACFA66D00886532 /* MeMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649777601ACFA66D00886532 /* MeMainTableViewController.m */; };
 		649777651ACFB40900886532 /* FindCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 649777641ACFB40900886532 /* FindCollectionViewCell.m */; };
 		649777691ACFD22600886532 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649777681ACFD22600886532 /* LoginViewController.m */; };
+		649F09E71AFDD3F8009BB05C /* GoodDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 649F09E61AFDD3F8009BB05C /* GoodDetailViewController.m */; };
+		649F09EB1AFDEF32009BB05C /* ReleaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 649F09EA1AFDEF32009BB05C /* ReleaseCollectionViewCell.m */; };
 		64B1999F1AEBA2EF00D72009 /* UnifiedUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 64B1999E1AEBA2EF00D72009 /* UnifiedUserInfoManager.m */; };
 		64DF305E1ADFEEDD008ABCC0 /* LoginRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64DF305D1ADFEEDD008ABCC0 /* LoginRegistViewController.m */; };
 		64EC7E101AF5C37B00653841 /* goodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 64EC7E0F1AF5C37B00653841 /* goodModel.m */; };
@@ -70,6 +72,10 @@
 		649777641ACFB40900886532 /* FindCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindCollectionViewCell.m; sourceTree = "<group>"; };
 		649777671ACFD22600886532 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		649777681ACFD22600886532 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		649F09E51AFDD3F8009BB05C /* GoodDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodDetailViewController.h; sourceTree = "<group>"; };
+		649F09E61AFDD3F8009BB05C /* GoodDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodDetailViewController.m; sourceTree = "<group>"; };
+		649F09E91AFDEF32009BB05C /* ReleaseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseCollectionViewCell.h; sourceTree = "<group>"; };
+		649F09EA1AFDEF32009BB05C /* ReleaseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseCollectionViewCell.m; sourceTree = "<group>"; };
 		64B1999D1AEBA2EF00D72009 /* UnifiedUserInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnifiedUserInfoManager.h; sourceTree = "<group>"; };
 		64B1999E1AEBA2EF00D72009 /* UnifiedUserInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnifiedUserInfoManager.m; sourceTree = "<group>"; };
 		64DF305C1ADFEEDD008ABCC0 /* LoginRegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRegistViewController.h; sourceTree = "<group>"; };
@@ -179,6 +185,8 @@
 				649777621ACFB3F200886532 /* View */,
 				649777561ACFA63200886532 /* FindMainCollectionViewController.h */,
 				649777571ACFA63200886532 /* FindMainCollectionViewController.m */,
+				649F09E51AFDD3F8009BB05C /* GoodDetailViewController.h */,
+				649F09E61AFDD3F8009BB05C /* GoodDetailViewController.m */,
 			);
 			path = Find;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 		649777501ACFA37A00886532 /* Release */ = {
 			isa = PBXGroup;
 			children = (
+				649F09E81AFDEF11009BB05C /* Cell */,
 				64EC7E0D1AF5C36200653841 /* Model */,
 				649777591ACFA64200886532 /* ReleaseMainCollectionViewController.h */,
 				6497775A1ACFA64200886532 /* ReleaseMainCollectionViewController.m */,
@@ -234,6 +243,15 @@
 				64DF305D1ADFEEDD008ABCC0 /* LoginRegistViewController.m */,
 			);
 			path = LoginClass;
+			sourceTree = "<group>";
+		};
+		649F09E81AFDEF11009BB05C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				649F09E91AFDEF32009BB05C /* ReleaseCollectionViewCell.h */,
+				649F09EA1AFDEF32009BB05C /* ReleaseCollectionViewCell.m */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		64B1999C1AEBA2C500D72009 /* Manager */ = {
@@ -428,6 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				649F09E71AFDD3F8009BB05C /* GoodDetailViewController.m in Sources */,
 				6497772F1ACF9DB700886532 /* AppDelegate.m in Sources */,
 				649777611ACFA66D00886532 /* MeMainTableViewController.m in Sources */,
 				64F126321AF61C11008AD602 /* ReleaseGoodsViewController.m in Sources */,
@@ -437,6 +456,7 @@
 				649777581ACFA63200886532 /* FindMainCollectionViewController.m in Sources */,
 				649777691ACFD22600886532 /* LoginViewController.m in Sources */,
 				647759261AF6077200FD99A6 /* NSDictionary+safeManager.m in Sources */,
+				649F09EB1AFDEF32009BB05C /* ReleaseCollectionViewCell.m in Sources */,
 				6497775B1ACFA64200886532 /* ReleaseMainCollectionViewController.m in Sources */,
 				64EC7E171AF5CA0E00653841 /* UserInfoInputViewController.m in Sources */,
 				6497775E1ACFA66000886532 /* ContactMainTableViewController.m in Sources */,

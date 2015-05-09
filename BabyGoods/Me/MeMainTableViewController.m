@@ -36,7 +36,7 @@
     if (currentUser != nil) {
         // 允许用户使用应用
         AVQuery *query = [AVQuery queryWithClassName:kUserInfoModel];
-//        [query whereKey:user_loginName equalTo:[[UnifiedUserInfoManager share] getUserLoginName]];
+        [query whereKey:user_loginName equalTo:[[UnifiedUserInfoManager share] getUserLoginName]];
         AVObject *object = [query getFirstObject];
         self.userInfoModel.userName = [object objectForKey:user_name];
         self.userInfoModel.userMobile = [object objectForKey:user_mobile];
@@ -79,11 +79,13 @@
 // 保存数据
 - (IBAction)saveData:(UIBarButtonItem *)sender {
     
+    NSString *loginName = [[UnifiedUserInfoManager share
+                            ] getUserLoginName];
     AVObject *userInfoModel = [AVObject objectWithClassName:kUserInfoModel];
     [userInfoModel setObject:self.userInfoModel.userName forKey:user_name];
     [userInfoModel setObject:self.userInfoModel.userMobile forKey:user_mobile];
     [userInfoModel setObject:self.userInfoModel.userAddr forKey:user_address];
-    [userInfoModel setObject:self.userInfoModel.loginName forKey:user_loginName];
+    [userInfoModel setObject:loginName forKey:user_loginName];
 
     [userInfoModel saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded)

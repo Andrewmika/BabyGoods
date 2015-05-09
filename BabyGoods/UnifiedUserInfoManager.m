@@ -36,8 +36,10 @@
 
 - (NSString *)getUserLoginName
 {
-    NSString *strLoginName;
-    [_defaults objectForKey:Dict_loginName];
+    NSString *strLoginName = @"";
+    if ([_defaults objectForKey:Dict_loginName]) {
+        strLoginName = [_defaults objectForKey:Dict_loginName];
+    }
     return strLoginName;
 }
 
