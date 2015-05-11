@@ -101,6 +101,7 @@ static NSString * const reuseIdentifier = @"releaseCell";
             model.goodName = [object objectForKey:good_name];
             model.goodAges = [object objectForKey:good_ages];
             model.goodUserName = [object objectForKey:good_userName];
+            model.geoPoint = [object objectForKey:good_geoPoint];
             AVFile *file = [object objectForKey:good_image];
             model.imagePath = file.url;
             [self.arrayModels addObject:model];

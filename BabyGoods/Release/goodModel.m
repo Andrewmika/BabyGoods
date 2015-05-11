@@ -10,4 +10,12 @@
 
 @implementation goodModel
 
+- (AVGeoPoint *)geoPoint
+{
+    if (!_geoPoint)
+    {
+        _geoPoint = [AVGeoPoint geoPoint];
+    }
+    return _geoPoint;
+}
 @end
