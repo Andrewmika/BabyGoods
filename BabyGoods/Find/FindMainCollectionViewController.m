@@ -85,7 +85,8 @@ static NSString * const reuseIdentifier = @"findCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self getGoodsWithDistance:self.distance];
+
 }
 
 // 定位
@@ -160,30 +161,40 @@ static NSString * const reuseIdentifier = @"findCell";
             break;
     }
     
-    [self getGoodsWithDistance:self.distance];
 }
 
 - (void)getGoodsWithDistance:(DistanceTag)distance
 {
-    [self.arrayModels removeAllObjects];
+    [SVProgressHUD show];
+
     AVQuery *query = [AVQuery queryWithClassName:kGoodModel];
     NSString *loginName = [[UnifiedUserInfoManager share] getUserLoginName];
     [query whereKey:good_userName notEqualTo:loginName];
-    [query whereKey:good_geoPoint nearGeoPoint:self.selfGeoPoint withinRadians:self.distance];
+    [query whereKey:good_geoPoint nearGeoPoint:self.selfGeoPoint withinKilometers:distance];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        for (AVObject *object in objects)
+        if (!error)
         {
-            goodModel *model = [[goodModel alloc] init];
-            model.goodName = [object objectForKey:good_name];
-            model.goodAges = [object objectForKey:good_ages];
-            model.goodUserName = [object objectForKey:good_userName];
-            model.geoPoint = [object objectForKey:good_geoPoint];
-            AVFile *file = [object objectForKey:good_image];
-            model.imagePath = file.url;
-            [self.arrayModels addObject:model];
+            [self.arrayModels removeAllObjects];
+            for (AVObject *object in objects)
+            {
+                goodModel *model = [[goodModel alloc] init];
+                model.goodName = [object objectForKey:good_name];
+                model.goodAges = [object objectForKey:good_ages];
+                model.goodUserName = [object objectForKey:good_userName];
+                model.geoPoint = [object objectForKey:good_geoPoint];
+                AVFile *file = [object objectForKey:good_image];
+                model.imagePath = file.url;
+                [self.arrayModels addObject:model];
+            }
+            [SVProgressHUD dismiss];
+            [self.collectionView reloadData];
+
         }
-        [self.collectionView reloadData];
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }
 
     }];
 

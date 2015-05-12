@@ -35,14 +35,7 @@
     AVUser *currentUser = [AVUser currentUser];
     if (currentUser != nil) {
         // 允许用户使用应用
-        AVQuery *query = [AVQuery queryWithClassName:kUserInfoModel];
-        [query whereKey:user_loginName equalTo:[[UnifiedUserInfoManager share] getUserLoginName]];
-        AVObject *object = [query getFirstObject];
-        self.userInfoModel.userName = [object objectForKey:user_name];
-        self.userInfoModel.userMobile = [object objectForKey:user_mobile];
-        self.userInfoModel.userAddr = [object objectForKey:user_address];
-        self.userInfoModel.loginName = [object objectForKey:user_loginName];
-
+        [self getUserInfo];
     } else {
         //缓存用户对象为空时，可打开用户注册界面…
         [self performSegueWithIdentifier:@"meToLogin" sender:self.navigationController];
@@ -59,6 +52,28 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+// 获取个人信息
+- (void)getUserInfo
+{
+    AVQuery *query = [AVQuery queryWithClassName:kUserInfoModel];
+    [query whereKey:user_loginName equalTo:[[UnifiedUserInfoManager share] getUserLoginName]];
+    [query getFirstObjectInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        if (!error)
+        {
+            self.userInfoModel.userName = [object objectForKey:user_name];
+            self.userInfoModel.userMobile = [object objectForKey:user_mobile];
+            self.userInfoModel.userAddr = [object objectForKey:user_address];
+            self.userInfoModel.loginName = [object objectForKey:user_loginName];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }
+        [self.tableView reloadData];
+    }];
+    
 }
 
 - (UserInfoModel *)userInfoModel
