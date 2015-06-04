@@ -161,6 +161,8 @@ static NSString * const reuseIdentifier = @"findCell";
             break;
     }
     
+    [self getGoodsWithDistance:self.distance];
+    
 }
 
 - (void)getGoodsWithDistance:(DistanceTag)distance
